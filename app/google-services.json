@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "141821163441",
+    "project_id": "projectmanagement-2c6f9",
+    "storage_bucket": "projectmanagement-2c6f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141821163441:android:3bface629b662a5cfaaf90",
+        "android_client_info": {
+          "package_name": "com.anggaa.projectmanagement"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxoRHNGPhBfxEBfLYIaYKdiO1XCm0ozlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
