@@ -115,7 +115,7 @@ class ProjectAdapter(
             val projectName = view.findViewById<TextView>(R.id.ProjectName)
             val projectTaskSize = view.findViewById<TextView>(R.id.ProjectTask)
 
-            projectStatus.text = project.card_color
+            projectStatus.text = project.status_proyek
             projectName.text = project.nama_proyek
             projectTaskSize.text = "${taskList.filter { it.id_proyek == project.project_id }.size} Task"
 

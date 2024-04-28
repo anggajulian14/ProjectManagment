@@ -23,8 +23,8 @@ class HomeAllTask : Fragment() {
         private const val ARG_DATA_LIST = "dataList"
         private const val ARG_PROJECT = "project"
 
-        fun newInstance(ListTask: List<Task>, ListProject: List<Project>, project: Project): AllTask {
-            val fragment = AllTask()
+        fun newInstance(ListTask: List<Task>, ListProject: List<Project>, project: Project): HomeAllTask {
+            val fragment = HomeAllTask()
             val args = Bundle()
             args.putParcelableArrayList(ARG_DATA_LIST, ArrayList(ListTask))
             args.putParcelableArrayList(ARG_DATA_PROJECT, ArrayList(ListProject))

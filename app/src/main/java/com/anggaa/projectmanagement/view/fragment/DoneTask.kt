@@ -39,7 +39,7 @@ class DoneTask : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate layout fragment
-        val view = inflater.inflate(R.layout.fragment_all_task, container, false)
+        val view = inflater.inflate(R.layout.fragment_done_task, container, false)
 
         val dataList = arguments?.getParcelableArrayList<Task>(DoneTask.ARG_DATA_LIST)
         val dataProject = arguments?.getParcelableArrayList<Project>(DoneTask.ARG_DATA_PROJECT)

@@ -13,7 +13,7 @@ import com.anggaa.projectmanagement.adapter.AllTaskAdapter
 import com.anggaa.projectmanagement.model.Project
 import com.anggaa.projectmanagement.model.Task
 
-class OngoingTask : Fragment() {
+class DetailTask : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AllTaskAdapter
@@ -23,8 +23,8 @@ class OngoingTask : Fragment() {
         private const val ARG_DATA_LIST = "dataList"
         private const val ARG_PROJECT = "project"
 
-        fun newInstance(ListProject: List<Project>, ListTask: List<Task>, project: Project): OngoingTask {
-            val fragment = OngoingTask()
+        fun newInstance(ListTask: List<Task>, ListProject: List<Project>, project: Project): DetailTask {
+            val fragment = DetailTask()
             val args = Bundle()
             args.putParcelableArrayList(ARG_DATA_LIST, ArrayList(ListTask))
             args.putParcelableArrayList(ARG_DATA_PROJECT, ArrayList(ListProject))
@@ -34,22 +34,23 @@ class OngoingTask : Fragment() {
         }
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate layout fragment
-        val view = inflater.inflate(R.layout.fragment_ongoing_task, container, false)
+        val view = inflater.inflate(R.layout.fragment_detail_task, container, false)
 
-        val dataList = arguments?.getParcelableArrayList<Task>(OngoingTask.ARG_DATA_LIST)
-        val dataProject = arguments?.getParcelableArrayList<Project>(OngoingTask.ARG_DATA_PROJECT)
-        val project = arguments?.getParcelable<Project>(OngoingTask.ARG_PROJECT)
+        val dataList = arguments?.getParcelableArrayList<Task>(ARG_DATA_LIST)
+        val dataProject = arguments?.getParcelableArrayList<Project>(ARG_DATA_PROJECT)
+        val project = arguments?.getParcelable<Project>(ARG_PROJECT)
 
-        if (dataList != null && project != null && dataProject != null) {
+        if (dataList != null && project != null) {
             if (project.nama_proyek == "HOMESCREEN"){
                 recyclerView = view.findViewById(R.id.RecyclerView)
 
-                adapter = AllTaskAdapter(dataList, project, dataProject)
+                adapter = AllTaskAdapter(dataList, project, dataProject!!)
 
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -59,7 +60,7 @@ class OngoingTask : Fragment() {
 
                 adapter = AllTaskAdapter(dataList.filter {
                     it.id_proyek == project.project_id
-                }, project, dataProject)
+                }, project, dataProject!!)
 
                 recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -75,5 +76,4 @@ class OngoingTask : Fragment() {
     private fun logData(tag: String, data: String) {
         Log.d(tag, "$tag: $data")
     }
-
 }

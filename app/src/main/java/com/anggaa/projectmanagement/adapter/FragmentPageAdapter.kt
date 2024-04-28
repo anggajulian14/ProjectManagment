@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.anggaa.projectmanagement.model.Project
 import com.anggaa.projectmanagement.model.Task
 import com.anggaa.projectmanagement.view.fragment.AllTask
+import com.anggaa.projectmanagement.view.fragment.DetailTask
 import com.anggaa.projectmanagement.view.fragment.DoneTask
 import com.anggaa.projectmanagement.view.fragment.OngoingTask
 import com.anggaa.projectmanagement.view.fragment.ToDoTask
@@ -37,16 +38,16 @@ class FragmentPageAdapter
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> AllTask.newInstance(ListTask!!, ListProject!!, project!!)
-            1 -> ToDoTask.newInstance(ListTask!!.filter {
+            0 -> DetailTask.newInstance(ListTask!!, ListProject!!, project!!)
+            1 -> DetailTask.newInstance(ListTask!!.filter {
                 it.status_tugas == "To Do"
             },ListProject!!, project!!)
-            2 -> OngoingTask.newInstance(ListProject!!, ListTask!!.filter {
+            2 -> DetailTask.newInstance(ListTask!!.filter {
                 it.status_tugas == "Ongoing"
-            }, project!!)
-            else -> DoneTask.newInstance(ListProject!!, ListTask!!.filter {
+            },ListProject!!, project!!)
+            else -> DetailTask.newInstance(ListTask!!.filter {
                 it.status_tugas == "Selesai"
-            }, project!!)
+            },ListProject!!, project!!)
         }
     }
 

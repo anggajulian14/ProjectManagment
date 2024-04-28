@@ -10,8 +10,11 @@ import com.anggaa.projectmanagement.model.Task
 import com.anggaa.projectmanagement.view.fragment.AllTask
 import com.anggaa.projectmanagement.view.fragment.DoneTask
 import com.anggaa.projectmanagement.view.fragment.HomeAllTask
+import com.anggaa.projectmanagement.view.fragment.HomeTask
 import com.anggaa.projectmanagement.view.fragment.OngoingTask
 import com.anggaa.projectmanagement.view.fragment.ToDoTask
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class FragmentHomePageAdapter
     (fragmentManager: FragmentManager,
@@ -38,19 +41,27 @@ class FragmentHomePageAdapter
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            0 -> HomeAllTask.newInstance(ListTask!!, ListProject!!, project!!)
-            1 -> ToDoTask.newInstance(ListTask!!.filter {
-                it.status_tugas == "To Do"
-            },ListProject!!, project!!)
-            2 -> OngoingTask.newInstance(ListProject!!, ListTask!!.filter {
-                it.status_tugas == "Ongoing"
-            }, project!!)
-            else -> DoneTask.newInstance(ListProject!!, ListTask!!.filter {
-                it.status_tugas == "Selesai"
-            }, project!!)
+        val filteredTasks = when (position) {
+            0 -> ListTask!!
+            1 -> ListTask!!.filter { it.status_tugas == "To Do" }
+            2 -> ListTask!!.filter { it.status_tugas == "Ongoing" }
+            else -> ListTask!!.filter { it.status_tugas == "Selesai" }
         }
+        return HomeTask.newInstance(urutkanTugasBerdasarkanTanggal(filteredTasks), ListProject!!, project!!)
     }
+
+    fun convertDateFormat(dateString: String): String {
+        val inputFormat = SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID"))
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd", Locale("id", "ID"))
+        val date = inputFormat.parse(dateString)
+        return outputFormat.format(date!!)
+    }
+
+    // Fungsi utama untuk mengurutkan daftar Tugas berdasarkan tanggal tenggat
+    fun urutkanTugasBerdasarkanTanggal(tugasList: List<Task>): List<Task> {
+        return tugasList.sortedBy { it.tanggal_selesai }
+    }
+
 
     private fun logData(tag: String, data: String) {
         Log.d(tag, "$tag: $data")
