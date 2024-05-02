@@ -3,7 +3,7 @@
     <style name="Base.Theme.ProjectManagement" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <item name="colorPrimary">@color/black</item>
-        <item name="colorSecondary">@color/white</item> <!-- Tambahkan warna sekunder di sini -->
+        <item name="colorSecondary">@color/black</item> <!-- Tambahkan warna sekunder di sini -->
     </style>
 
     <style name="Theme.ProjectManagement" parent="Base.Theme.ProjectManagement" />

@@ -9,109 +9,121 @@
     android:orientation="vertical"
     android:layout_gravity="center">
 
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="30dp">
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageButton
-                android:layout_width="35sp"
-                android:layout_height="35sp"
-                android:src="@drawable/menu"
-                android:background="@null"
-                android:id="@+id/buttonMenu"
-                android:layout_gravity="start"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/profile"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"/>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="35sp"
-                android:layout_height="35sp"
-                android:layout_gravity="end"
-                app:cardCornerRadius="100dp"
-                android:id="@+id/profile"
-                android:layout_margin="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:elevation="0dp"
-                android:outlineAmbientShadowColor="@null"
-                app:layout_constraintStart_toEndOf="@id/buttonMenu"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHorizontal_bias="1">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageProfile"/>
-
-            </androidx.cardview.widget.CardView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Project \nManagement."
-            android:fontFamily="@font/poppinssemibold"
-            android:textColor="@color/black"
-            android:textSize="35sp"
-            android:layout_marginTop="15dp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/listProject"
-            android:layout_marginTop="20dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@drawable/card_shape"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Task"
-            android:textColor="@color/black"
-            android:fontFamily="@font/poppinssemibold"
-            android:textSize="25sp"
-            android:layout_marginTop="20dp"
-            android:layout_marginStart="30dp"/>
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            app:tabMode="fixed"
-            android:backgroundTint="@color/white"
-            app:tabGravity="fill"
-            app:tabIndicatorGravity="stretch"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextAppearance="@style/TabLayoutTextStyle"
-            app:tabIndicator="@drawable/tab_indicator"
-            android:layout_marginHorizontal="30dp"/>
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="30dp"/>
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="30dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:layout_width="35sp"
+                        android:layout_height="35sp"
+                        android:src="@drawable/menu"
+                        android:background="@null"
+                        android:id="@+id/buttonMenu"
+                        android:layout_gravity="start"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/profile"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="35sp"
+                        android:layout_height="35sp"
+                        android:layout_gravity="end"
+                        app:cardCornerRadius="100dp"
+                        android:id="@+id/profile"
+                        android:layout_margin="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:elevation="0dp"
+                        android:outlineAmbientShadowColor="@null"
+                        app:layout_constraintStart_toEndOf="@id/buttonMenu"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_bias="1">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/imageProfile"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Project \nManagement."
+                    android:fontFamily="@font/poppinssemibold"
+                    android:textColor="@color/black"
+                    android:textSize="35sp"
+                    android:layout_marginTop="15dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/listProject"
+                    android:layout_marginTop="20dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="700dp"
+                android:orientation="vertical"
+                android:background="@drawable/card_shape">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Task"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppinssemibold"
+                    android:textSize="25sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="30dp"/>
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    app:tabMode="fixed"
+                    android:backgroundTint="@color/white"
+                    app:tabGravity="fill"
+                    app:tabIndicatorGravity="stretch"
+                    app:tabIndicatorAnimationMode="elastic"
+                    app:tabSelectedTextColor="@color/white"
+                    app:tabTextAppearance="@style/TabLayoutTextStyle"
+                    app:tabIndicator="@drawable/tab_indicator"
+                    android:layout_marginHorizontal="30dp"/>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/viewPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="30dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

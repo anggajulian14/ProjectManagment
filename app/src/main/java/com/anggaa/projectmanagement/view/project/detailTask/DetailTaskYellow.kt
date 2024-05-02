@@ -1,18 +1,18 @@
 package com.anggaa.projectmanagement.view.project.detailTask
 
-import android.os.Build
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.anggaa.projectmanagement.R
 import com.anggaa.projectmanagement.model.Task
+import java.text.SimpleDateFormat
+import java.util.Locale
 
-class DetailTask : AppCompatActivity() {
+class DetailTaskYellow : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -38,5 +38,19 @@ class DetailTask : AppCompatActivity() {
             finish()
         }
 
+        findViewById<TextView>(R.id.TaskStatus).text = Task?.status_tugas
+        findViewById<TextView>(R.id.JudulTask).text = Task?.nama_tugas
+        findViewById<TextView>(R.id.TaskStatus).text = Task?.status_tugas
+        findViewById<TextView>(R.id.TaskDimulai).text = formatDate(Task?.tanggal_mulai!!)
+        findViewById<TextView>(R.id.TaskBerakhir).text = formatDate(Task.tanggal_selesai)
+        findViewById<TextView>(R.id.DeskripsiTask).text = Task.deskripsi_tugas
+
+    }
+
+    private fun formatDate(inputDate: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("d MMMM yyyy", Locale("id", "ID"))
+        val date = inputFormat.parse(inputDate)
+        return outputFormat.format(date!!)
     }
 }

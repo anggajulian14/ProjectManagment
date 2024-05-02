@@ -1,7 +1,6 @@
 package com.anggaa.projectmanagement.adapter
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.anggaa.projectmanagement.R
 import com.anggaa.projectmanagement.model.Project
 import com.anggaa.projectmanagement.model.Task
-import com.anggaa.projectmanagement.view.project.detailTask.DetailTask
+import com.anggaa.projectmanagement.view.project.detailTask.DetailTaskYellow
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -39,7 +38,7 @@ class AllTaskAdapter(
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val intent = Intent(itemView.context, DetailTask::class.java)
+                    val intent = Intent(itemView.context, DetailTaskYellow::class.java)
                     intent.putExtra("task", taskList[position])
                     intent.putExtra("project", project)
                     itemView.context.startActivity(intent)
@@ -68,7 +67,7 @@ class AllTaskAdapter(
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val intent = Intent(itemView.context, DetailTask::class.java)
+                    val intent = Intent(itemView.context, DetailTaskYellow::class.java)
                     intent.putExtra("task", taskList[position])
                     intent.putExtra("project", project)
                     itemView.context.startActivity(intent)
@@ -97,7 +96,7 @@ class AllTaskAdapter(
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val intent = Intent(itemView.context, DetailTask::class.java)
+                    val intent = Intent(itemView.context, DetailTaskYellow::class.java)
                     intent.putExtra("task", taskList[position])
                     intent.putExtra("project", project)
                     itemView.context.startActivity(intent)
@@ -126,7 +125,7 @@ class AllTaskAdapter(
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val intent = Intent(itemView.context, DetailTask::class.java)
+                    val intent = Intent(itemView.context, DetailTaskYellow::class.java)
                     intent.putExtra("task", taskList[position])
                     intent.putExtra("project", project)
                     itemView.context.startActivity(intent)
@@ -155,7 +154,7 @@ class AllTaskAdapter(
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val intent = Intent(itemView.context, DetailTask::class.java)
+                    val intent = Intent(itemView.context, DetailTaskYellow::class.java)
                     intent.putExtra("task", taskList[position])
                     intent.putExtra("project", project)
                     itemView.context.startActivity(intent)
@@ -184,7 +183,7 @@ class AllTaskAdapter(
             itemView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    val intent = Intent(itemView.context, DetailTask::class.java)
+                    val intent = Intent(itemView.context, DetailTaskYellow::class.java)
                     intent.putExtra("task", taskList[position])
                     intent.putExtra("project", project)
                     itemView.context.startActivity(intent)

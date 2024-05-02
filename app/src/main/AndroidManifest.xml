@@ -13,6 +13,12 @@
         android:theme="@style/Theme.ProjectManagement"
         tools:targetApi="31">
         <activity
+            android:name=".view.project.detailProject.TambahProject"
+            android:exported="false" />
+        <activity
+            android:name=".view.project.detailTask.TambahTask"
+            android:exported="false" />
+        <activity
             android:name=".view.project.detailProject.DetailProjectPurple"
             android:exported="false" />
         <activity
@@ -28,7 +34,7 @@
             android:name=".view.project.detailProject.AllProject"
             android:exported="false" />
         <activity
-            android:name=".view.project.detailTask.DetailTask"
+            android:name=".view.project.detailTask.DetailTaskYellow"
             android:exported="false" />
         <activity
             android:name=".view.project.detailProject.DetailProjectYellow"

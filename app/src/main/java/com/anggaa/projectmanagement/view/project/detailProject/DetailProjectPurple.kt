@@ -66,7 +66,7 @@ class DetailProjectPurple : AppCompatActivity() {
         TabLayout = findViewById(R.id.tabLayout)
         ViewPager = findViewById(R.id.viewPager)
 
-        FragmentManager = FragmentPageAdapter(supportFragmentManager, lifecycle, ListTask, project!!, ListProject)
+        FragmentManager = FragmentPageAdapter(supportFragmentManager, lifecycle, ListTask,ListUser, project!!, ListProject)
 
         TabLayout.addTab(TabLayout.newTab().setText("All"))
         TabLayout.addTab(TabLayout.newTab().setText("To Do"))

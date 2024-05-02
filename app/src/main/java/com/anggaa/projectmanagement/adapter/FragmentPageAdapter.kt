@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.anggaa.projectmanagement.model.Project
 import com.anggaa.projectmanagement.model.Task
+import com.anggaa.projectmanagement.model.User
 import com.anggaa.projectmanagement.view.fragment.AllTask
 import com.anggaa.projectmanagement.view.fragment.DetailTask
 import com.anggaa.projectmanagement.view.fragment.DoneTask
@@ -18,16 +19,19 @@ class FragmentPageAdapter
      lifecycle: Lifecycle) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
          private var project: Project? = null
+         private var ListUser: List<User>? = null
          private var ListProject: List<Project>? = null
          private var ListTask: List<Task>? = null
 
     constructor(fragmentManager: FragmentManager,
                 lifecycle: Lifecycle,
                 ListTask: List<Task>,
+                ListUser: List<User>,
                 project: Project,
                 ListProject: List<Project>)
             : this(fragmentManager, lifecycle) {
                 this.ListTask = ListTask
+                this.ListUser = ListUser
                 this.ListProject = ListProject
                 this.project = project
             }
@@ -38,16 +42,16 @@ class FragmentPageAdapter
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> DetailTask.newInstance(ListTask!!, ListProject!!, project!!)
+            0 -> DetailTask.newInstance(ListTask!!, ListProject!!,ListUser!!, project!!)
             1 -> DetailTask.newInstance(ListTask!!.filter {
                 it.status_tugas == "To Do"
-            },ListProject!!, project!!)
+            },ListProject!!,ListUser!! ,project!!)
             2 -> DetailTask.newInstance(ListTask!!.filter {
                 it.status_tugas == "Ongoing"
-            },ListProject!!, project!!)
+            },ListProject!!,ListUser!! ,project!!)
             else -> DetailTask.newInstance(ListTask!!.filter {
                 it.status_tugas == "Selesai"
-            },ListProject!!, project!!)
+            },ListProject!!,ListUser!! ,project!!)
         }
     }
 

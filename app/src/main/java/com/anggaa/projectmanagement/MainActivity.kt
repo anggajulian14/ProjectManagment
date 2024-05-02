@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
             putParcelableArrayListExtra("laporanList", ArrayList(laporanList))
         }
         startActivity(intent)
+        finish()
     }
 
 

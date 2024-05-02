@@ -25,10 +25,12 @@ data class User(
 
     @get:PropertyName("gudang_akses")
     @set:PropertyName("gudang_akses")
-    var WarehouseAccess: String
+    var WarehouseAccess: String,
+
+    var isSelected: Boolean
 
 ) : Parcelable {
-    constructor() : this(0, "", "", "", "")}
+    constructor() : this(0, "", "", "", "", false)}
 
 @Parcelize
 data class Project(
@@ -50,10 +52,11 @@ data class Task(
     val nama_tugas: String,
     val tanggal_mulai: String,
     val tanggal_selesai: String,
-    val status_tugas: String,
-    val id_pengguna: List<Int>
+    var status_tugas: String,
+    val id_pengguna: List<Int>,
+    val deskripsi_tugas: String
 ) : Parcelable{
-    constructor() : this(0, 0, "", "","", "", emptyList())
+    constructor() : this(0, 0, "", "","", "", emptyList(), "")
 }
 
 @Parcelize

@@ -1,5 +1,6 @@
 package com.anggaa.projectmanagement.view.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.enableEdgeToEdge
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.anggaa.projectmanagement.R
 import com.anggaa.projectmanagement.adapter.FragmentHomePageAdapter
-import com.anggaa.projectmanagement.adapter.FragmentPageAdapter
 import com.anggaa.projectmanagement.adapter.ProjectAdapter
 import com.anggaa.projectmanagement.model.Laporan
 import com.anggaa.projectmanagement.model.Project
@@ -23,6 +23,9 @@ import com.anggaa.projectmanagement.view.project.detailProject.DetailProjectPurp
 import com.anggaa.projectmanagement.view.project.detailProject.DetailProjectRed
 import com.anggaa.projectmanagement.view.project.detailProject.DetailProjectYellow
 import com.google.android.material.tabs.TabLayout
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class HomeScreen : AppCompatActivity() {
 
@@ -62,89 +65,77 @@ class HomeScreen : AppCompatActivity() {
 
     }
 
-        private fun initView() {
-            ProjectRecyclerView = findViewById<RecyclerView>(R.id.listProject)
-            ProjectAdapter = ProjectAdapter(this, ListProject,ListTask) { project ->
-                if (project.card_color == "yellow") {
-                    val intent = android.content.Intent(this, DetailProjectYellow::class.java)
-                    intent.putExtra("project", project)
-                    intent.putParcelableArrayListExtra("userList", ListUser)
-                    intent.putParcelableArrayListExtra("taskList", ListTask)
-                    intent.putParcelableArrayListExtra("laporanList", ListLaporan)
-                    intent.putParcelableArrayListExtra("projectList", ListProject)
-                    startActivity(intent)
-                } else if (project.card_color == "blue") {
-                    val intent = android.content.Intent(this, DetailProjectBlue::class.java)
-                    intent.putExtra("project", project)
-                    intent.putParcelableArrayListExtra("userList", ListUser)
-                    intent.putParcelableArrayListExtra("taskList", ListTask)
-                    intent.putParcelableArrayListExtra("laporanList", ListLaporan)
-                    intent.putParcelableArrayListExtra("projectList", ListProject)
-                    startActivity(intent)
-                } else if (project.card_color == "green") {
-                    val intent = android.content.Intent(this, DetailProjectGreen::class.java)
-                    intent.putExtra("project", project)
-                    intent.putParcelableArrayListExtra("userList", ListUser)
-                    intent.putParcelableArrayListExtra("taskList", ListTask)
-                    intent.putParcelableArrayListExtra("laporanList", ListLaporan)
-                    intent.putParcelableArrayListExtra("projectList", ListProject)
-                    startActivity(intent)
-                } else if (project.card_color == "red") {
-                    val intent = android.content.Intent(this, DetailProjectRed::class.java)
-                    intent.putExtra("project", project)
-                    intent.putParcelableArrayListExtra("userList", ListUser)
-                    intent.putParcelableArrayListExtra("taskList", ListTask)
-                    intent.putParcelableArrayListExtra("laporanList", ListLaporan)
-                    intent.putParcelableArrayListExtra("projectList", ListProject)
-                    startActivity(intent)
-                } else if (project.card_color == "purple") {
-                    val intent = android.content.Intent(this, DetailProjectPurple::class.java)
-                    intent.putExtra("project", project)
-                    intent.putParcelableArrayListExtra("userList", ListUser)
-                    intent.putParcelableArrayListExtra("taskList", ListTask)
-                    intent.putParcelableArrayListExtra("laporanList", ListLaporan)
-                    intent.putParcelableArrayListExtra("projectList", ListProject)
-                    startActivity(intent)
-                }
+    private fun initView() {
+        val ListProjectUrutTanggal = urutkanProjectBerdasarkanTenggat(ListProject)
+        val limaitempertamadari_ListProjectUrutTanggal = ListProjectUrutTanggal.subList(0, 6)
+
+        ProjectRecyclerView = findViewById<RecyclerView>(R.id.listProject)
+        ProjectAdapter = ProjectAdapter(this, limaitempertamadari_ListProjectUrutTanggal, ListTask) { project ->
+            val intent = Intent(this, getDetailProjectActivity(project.card_color))
+            intent.putExtra("project", project)
+            intent.putParcelableArrayListExtra("userList", ListUser)
+            intent.putParcelableArrayListExtra("taskList", ListTask)
+            intent.putParcelableArrayListExtra("laporanList", ListLaporan)
+            intent.putParcelableArrayListExtra("projectList", ListProject)
+            intent.putExtra("activity", "home")
+            startActivity(intent)
+        }
+        ProjectRecyclerView.adapter = ProjectAdapter
+        val horizontalLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        ProjectRecyclerView.layoutManager = horizontalLayoutManager
+
+        setupTabLayout()
+
+        ViewPager = findViewById(R.id.viewPager)
+
+        val project = Project(255, "HOMESCREEN", "1", "1", "HOMESCREEN", "AMAN", "blue")
+        FragmentManager = FragmentHomePageAdapter(supportFragmentManager, lifecycle, ListTask, project, ListProject)
+        ViewPager.adapter = FragmentManager
+
+        ViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                TabLayout.selectTab(TabLayout.getTabAt(position))
             }
-            ProjectRecyclerView.adapter = ProjectAdapter
-            val horizontalLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            ProjectRecyclerView.layoutManager = horizontalLayoutManager
+        })
+    }
 
-            TabLayout = findViewById(R.id.tabLayout)
-            ViewPager = findViewById(R.id.viewPager)
+    private fun getDetailProjectActivity(cardColor: String): Class<out AppCompatActivity> {
+        return when (cardColor) {
+            "yellow" -> DetailProjectYellow::class.java
+            "blue" -> DetailProjectBlue::class.java
+            "green" -> DetailProjectGreen::class.java
+            "red" -> DetailProjectRed::class.java
+            else -> DetailProjectPurple::class.java
+        }
+    }
 
-            val project = Project(255, "HOMESCREEN", "1", "1", "HOMESCREEN", "AMAN", "blue")
+    private fun setupTabLayout() {
+        TabLayout = findViewById(R.id.tabLayout)
+        TabLayout.addTab(TabLayout.newTab().setText("All"))
+        TabLayout.addTab(TabLayout.newTab().setText("To Do"))
+        TabLayout.addTab(TabLayout.newTab().setText("Ongoing"))
+        TabLayout.addTab(TabLayout.newTab().setText("Done"))
 
-            FragmentManager = FragmentHomePageAdapter(supportFragmentManager, lifecycle, ListTask, project, ListProject)
+        TabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(p0: TabLayout.Tab?) {
+                ViewPager.currentItem = p0!!.position
+            }
 
-            TabLayout.addTab(TabLayout.newTab().setText("All"))
-            TabLayout.addTab(TabLayout.newTab().setText("To Do"))
-            TabLayout.addTab(TabLayout.newTab().setText("Ongoing"))
-            TabLayout.addTab(TabLayout.newTab().setText("Done"))
+            override fun onTabUnselected(p0: TabLayout.Tab?) {}
 
-            ViewPager.adapter = FragmentManager
+            override fun onTabReselected(p0: TabLayout.Tab?) {}
+        })
+    }
 
-            TabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(p0: TabLayout.Tab?) {
-                    ViewPager.currentItem = p0!!.position
-                }
 
-                override fun onTabUnselected(p0: TabLayout.Tab?) {
+    fun convertStringToDate(dateString: String): Date {
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale("id", "ID"))
+        return sdf.parse(dateString) ?: Date()
+        }
 
-                }
-
-                override fun onTabReselected(p0: TabLayout.Tab?) {
-
-                }
-            })
-
-            ViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                override fun onPageSelected(position: Int) {
-                    TabLayout.selectTab(TabLayout.getTabAt(position))
-                }
-            })
-
+        // Mengurutkan ListProject berdasarkan tanggal tenggat
+        private fun urutkanProjectBerdasarkanTenggat(listProject: ArrayList<Project>): List<Project> {
+        return listProject.sortedBy { convertStringToDate(it.tanggal_selesai) }
         }
 
         private fun logData(tag: String, data: String) {
